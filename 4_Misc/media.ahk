@@ -1,13 +1,12 @@
-﻿#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
-; #Warn  ; Enable warnings to assist with detecting common errors.
-SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
-SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
-#IfWinActive ahk_class QWidget
+﻿SetTitleMatchMode, 2
+
+#IfWinActive, VLC media player
+
 ~LButton::
- MouseGetPos, , , ,control
-if (SubStr(control, 1, 7)=="VLC MSW")
-{
-SendInput, {Space}
-}
- Return
+MouseGetPos,XX,YY
+WinGetPos,,,WW,HH, A
+if ((XX >= WW*0.20) and (XX <= WW*0.80) and (YY >= HH*0.20) and (YY <= HH*0.70))
+    Send {Space}
+return
+
 #IfWinActive
