@@ -2,13 +2,12 @@
 ; #Warn  ; Enable warnings to assist with detecting common errors.
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
-
-;This script will run if what it is running is not running e.g. notepad
-IfWinNotExist, Untitled - Notepad
+#IfWinActive ahk_class QWidget
+~LButton::
+ MouseGetPos, , , ,control
+if (SubStr(control, 1, 7)=="VLC MSW")
 {
-    run, Notepad.exe
-    WinActivate  ; Automatically uses the window found above.
-    WinWaitActive, Untitled - Notepad
-    Send, 7 lines{!}{Enter}
-    return
+SendInput, {Space}
 }
+ Return
+#IfWinActive
